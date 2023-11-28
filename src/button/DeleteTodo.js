@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const DeleteTodo = () => {
-  return (
-    <div>DeleteTodo</div>
-  )
-}
+  const handleDeleteTodo = () => {
+    console.log('Deleting todo');
+  };
 
-export default DeleteTodo
+  return (
+    <div>
+      <button onClick={handleDeleteTodo}>Delete Todo</button>
+    </div>
+  );
+};
+
+export default DeleteTodo;

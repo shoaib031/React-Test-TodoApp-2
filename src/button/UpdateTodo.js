@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const UpdateTodo = () => {
-  return (
-    <div>UpdateTodo</div>
-  )
-}
+  const handleUpdateTodo = () => {
+    console.log('Updating todo');
+  };
 
-export default UpdateTodo
+  return (
+    <div>
+      <button onClick={handleUpdateTodo}>Update Todo</button>
+    </div>
+  );
+};
+
+export default UpdateTodo;

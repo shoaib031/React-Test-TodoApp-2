@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const savedFormData = localStorage.getItem('formData');
-    if (savedFormData) {
-      setFormData(JSON.parse(savedFormData));
-    }
-  }, []);
+  const [formData, setFormData] = useState({
+    name: localStorage.getItem('Name') || '',
+    email: localStorage.getItem('Email') || '',
+    password: localStorage.getItem('Password') || '',
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,10 +20,20 @@ const SignUp = () => {
 
   const handleSignUpClick = () => {
     console.log('Sign Up button clicked');
-    console.log('Name:', formData.name);
-    console.log('Email:', formData.email);
-    console.log('Password:', formData.password);
-    localStorage.setItem('formData', JSON.stringify(formData));
+    console.log(formData.name);
+    console.log(formData.email);
+    console.log(formData.password);
+    localStorage.setItem('Name', formData.name);
+    localStorage.setItem('Email', formData.email);
+    localStorage.setItem('Password', formData.password);
+
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+    });
+
+    navigate('/signin');
   };
 
   return (
@@ -36,22 +42,15 @@ const SignUp = () => {
         <h1>Sign Up Form</h1>
         <label>
           Name:
-          <input
-            type="text" name='name' placeholder='Enter Your Name' className='input-field' onChange={handleInputChange}
-            value={formData.name}
-          />
+          <input type="text" name='name' placeholder='Enter Your Name' className='input-field' onChange={handleInputChange} value={formData.name} />
         </label>
         <label>
           Email:
-          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange}
-            value={formData.email}
-          />
+          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} value={formData.email} />
         </label>
         <label>
           Password:
-          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange}
-            value={formData.password}
-          />
+          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} value={formData.password} />
         </label>
         <button type='button' onClick={handleSignUpClick}>
           Sign Up

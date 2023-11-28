@@ -1,20 +1,13 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const SignIn = ({ onSignInSuccess,setIsSignedIn }) => {
+  const navigate = useNavigate();
 
-import React, { useState, useEffect } from 'react'
-
-const SignIn = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   });
-
-  useEffect(() => {
-    const savedFormData = localStorage.getItem('formData');
-    if (savedFormData) {
-      setFormData(JSON.parse(savedFormData));
-    }
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,28 +18,49 @@ const SignIn = () => {
   };
 
   const handleSignInClick = () => {
-    console.log('Sign In button clicked');
-    console.log('Name:', formData.name);
-    console.log('Email:', formData.email);
-    console.log('Password:', formData.password);
-    localStorage.setItem('formData', JSON.stringify(formData));
+
+    const storedData = {
+      email: localStorage.getItem('Email') || '',
+      password: localStorage.getItem('Password') || '',
+    };
+
+    if (
+      formData.email === storedData.email &&
+      formData.password === storedData.password
+    ) {
+      onSignInSuccess(formData);
+      navigate('/');
+      setIsSignedIn(true)
+    } else {
+
+      alert('Please enter the information you provided during Sign-Up for the Sign-In here. Thank you!.');
+    }
   };
+
   return (
     <div className='form-parent'>
       <form>
         <h1>Sign In Form</h1>
         <label>
           Email:
-          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} />
+          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} value={formData.email}/>
         </label>
         <label>
           Password:
-          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} />
+          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} value={formData.password}/>
         </label>
-        <button type='submit' onClick={handleSignInClick}>Sign In</button>
+        <button type='button' onClick={handleSignInClick}>
+          Sign In
+        </button>
       </form>
     </div>
   );
 };
 
 export default SignIn;
+
+
+
+
+
+
