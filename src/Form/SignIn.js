@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const SignIn = () => {
-  const handleSignInClick = (e) => {
-    e.preventDefault();
-    console.log("Sign In button clicked");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSignInClick = () => {
+    console.log('Sign In button clicked');
+    console.log('Name:', formData.name);
+    console.log('Email:', formData.email);
+    console.log('Password:', formData.password);
   };
   return (
     <div className='form-parent'>
@@ -11,18 +27,16 @@ const SignIn = () => {
         <h1>Sign In Form</h1>
         <label>
           Email:
-          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' />
+          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} />
         </label>
         <label>
           Password:
-          <input type="password" name='password' placeholder='Enter Your password' className='input-field' />
+          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} />
         </label>
-        <button type='submit' onClick={handleSignInClick}>
-          Sign In
-        </button>
+        <button type='submit' onClick={handleSignInClick}>Sign In</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
