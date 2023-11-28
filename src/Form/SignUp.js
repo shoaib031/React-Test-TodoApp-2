@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
-    name : '',
+    name: '',
     email: '',
     password: '',
   });
@@ -20,6 +20,7 @@ const SignUp = () => {
     console.log('Name:', formData.name);
     console.log('Email:', formData.email);
     console.log('Password:', formData.password);
+    localStorage.setItem('formData', JSON.stringify(formData.name, formData.email, ));
   };
 
   return (
@@ -44,8 +45,8 @@ const SignUp = () => {
         </label>
         <button type='button' onClick={handleSignUpClick}>
           Sign Up
-          </button>
-          </form>
+        </button>
+      </form>
     </div>
   );
 };

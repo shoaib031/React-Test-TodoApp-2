@@ -20,6 +20,8 @@ const SignIn = () => {
     console.log('Name:', formData.name);
     console.log('Email:', formData.email);
     console.log('Password:', formData.password);
+    localStorage.setItem('formData', JSON.stringify(formData));
+
   };
   return (
     <div className='form-parent'>
