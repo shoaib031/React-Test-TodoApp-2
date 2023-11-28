@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignIn = ({ onSignInSuccess,setIsSignedIn }) => {
+const SignIn = ({ onSignInSuccess, setIsSignedIn }) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ const SignIn = ({ onSignInSuccess,setIsSignedIn }) => {
       setIsSignedIn(true)
     } else {
 
-      alert('Please enter the information you provided during Sign-Up for the Sign-In here. Thank you!.');
+      alert('Please enter the information you provided during Sign-Up for the Sign-In here. Thank you!');
     }
   };
 
@@ -43,11 +43,11 @@ const SignIn = ({ onSignInSuccess,setIsSignedIn }) => {
         <h1>Sign In Form</h1>
         <label>
           Email:
-          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} value={formData.email}/>
+          <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange} value={formData.email} />
         </label>
         <label>
           Password:
-          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} value={formData.password}/>
+          <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange} value={formData.password} />
         </label>
         <button type='button' onClick={handleSignInClick}>
           Sign In
