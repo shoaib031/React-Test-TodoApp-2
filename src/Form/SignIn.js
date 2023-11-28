@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+
+
+import React, { useState, useEffect } from 'react'
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
@@ -6,6 +8,13 @@ const SignIn = () => {
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +30,6 @@ const SignIn = () => {
     console.log('Email:', formData.email);
     console.log('Password:', formData.password);
     localStorage.setItem('formData', JSON.stringify(formData));
-
   };
   return (
     <div className='form-parent'>

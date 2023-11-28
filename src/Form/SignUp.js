@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -6,6 +6,13 @@ const SignUp = () => {
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +27,7 @@ const SignUp = () => {
     console.log('Name:', formData.name);
     console.log('Email:', formData.email);
     console.log('Password:', formData.password);
-    localStorage.setItem('formData', JSON.stringify(formData.name, formData.email, ));
+    localStorage.setItem('formData', JSON.stringify(formData));
   };
 
   return (
@@ -31,16 +38,19 @@ const SignUp = () => {
           Name:
           <input
             type="text" name='name' placeholder='Enter Your Name' className='input-field' onChange={handleInputChange}
+            value={formData.name}
           />
         </label>
         <label>
           Email:
           <input type="email" name='email' placeholder='Enter Your Email' className='input-field' onChange={handleInputChange}
+            value={formData.email}
           />
         </label>
         <label>
           Password:
           <input type="password" name='password' placeholder='Enter Your password' className='input-field' onChange={handleInputChange}
+            value={formData.password}
           />
         </label>
         <button type='button' onClick={handleSignUpClick}>
@@ -50,4 +60,5 @@ const SignUp = () => {
     </div>
   );
 };
-export default SignUp
+
+export default SignUp;
