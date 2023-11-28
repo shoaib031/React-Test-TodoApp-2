@@ -1,6 +1,10 @@
 import React from 'react'
 
 const SignIn = () => {
+  const handleSignInClick = (e) => {
+    e.preventDefault();
+    console.log("Sign In button clicked");
+  };
   return (
     <div className='form-parent'>
       <form>
@@ -13,7 +17,9 @@ const SignIn = () => {
           Password:
           <input type="password" name='password' placeholder='Enter Your password' className='input-field' />
         </label>
-        <button type='submit'>Submit</button>
+        <button type='submit' onClick={handleSignInClick}>
+          Sign In
+        </button>
       </form>
     </div>
   )
