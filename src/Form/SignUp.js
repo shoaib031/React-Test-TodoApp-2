@@ -5,9 +5,9 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: localStorage.getItem('Name') || '',
-    email: localStorage.getItem('Email') || '',
-    password: localStorage.getItem('Password') || '',
+    name: '',
+    email: '',
+    password: '',
   });
 
   const handleInputChange = (e) => {
@@ -17,15 +17,19 @@ const SignUp = () => {
       [name]: value,
     });
   };
-
   const handleSignUpClick = () => {
     console.log('Sign Up button clicked');
     console.log(formData.name);
     console.log(formData.email);
     console.log(formData.password);
-    localStorage.setItem('Name', formData.name);
-    localStorage.setItem('Email', formData.email);
-    localStorage.setItem('Password', formData.password);
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const newUser = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    };
+    const updatedUsers = [...existingUsers, newUser];
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
 
     setFormData({
       name: '',
@@ -61,3 +65,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+

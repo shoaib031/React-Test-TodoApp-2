@@ -18,24 +18,25 @@ const SignIn = ({ onSignInSuccess, setIsSignedIn }) => {
   };
 
   const handleSignInClick = () => {
-
     const storedData = {
       email: localStorage.getItem('Email') || '',
       password: localStorage.getItem('Password') || '',
     };
 
-    if (
-      formData.email === storedData.email &&
-      formData.password === storedData.password
-    ) {
+    if (!storedData.email) {
+      alert('User is not registered. Please sign up first.');
+    } else if (formData.email === storedData.email && formData.password === storedData.password) {
       onSignInSuccess(formData);
-      navigate('/');
-      setIsSignedIn(true)
-    } else {
+      navigate('/addtodo');
+      setIsSignedIn(true);
 
-      alert('Please enter the information you provided during Sign-Up for the Sign-In here. Thank you!');
+      localStorage.setItem('Email', formData.email);
+      localStorage.setItem('Password', formData.password);
+    } else {
+      alert('Pls Check Email or Password');
     }
   };
+
 
   return (
     <div className='form-parent'>
